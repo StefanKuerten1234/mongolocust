@@ -3,10 +3,10 @@ import os
 DEFAULTS = {'DB_NAME': 'loadtest',
             'COLLECTION_NAME': 'measurements',
             'CLUSTER_URL': f'mongodb+srv://stefan:STAVfvCkuHN0FgyT@stefans-playground.ex1vt.mongodb.net/',
-            'DOCS_PER_BATCH': 1000,
+            'DOCS_PER_BATCH': 100,
             'INSERT_WEIGHT': 0,
             'FIND_WEIGHT': 0,
-            'BULK_INSERT_WEIGHT': 1,
+            'BULK_INSERT_WEIGHT': 10,
             'AGG_PIPE_WEIGHT': 1}
 
 
