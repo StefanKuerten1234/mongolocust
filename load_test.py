@@ -48,7 +48,8 @@ class MongoSampleUser(MongoUser):
             'engine_temperature': self.faker.pyfloat(min_value=-40, max_value=300, right_digits=1),
             'connection_state': self.faker.random_element(elements=['online', 'offline']),
             'lte_connection_level': self.faker.pydecimal(min_value=0, max_value=100, right_digits=2),
-            'mode': self.faker.random_element(elements=['Light Speed', 'Ridiculous Speed', 'Ludicrous Speed', 'Plaid Speed'])
+            'mode': self.faker.random_element(
+                elements=['Light Speed', 'Ridiculous Speed', 'Ludicrous Speed', 'Plaid Speed'])
         }
         return document
 
@@ -58,22 +59,22 @@ class MongoSampleUser(MongoUser):
         Run an aggregation pipeline on a secondary node
         """
         # count number of inhabitants per city
-        group_by = {
-            '$group': {
-                '_id': '$city',
-                'total_inhabitants': {'$sum': 1}
-            }
-        }
+        # group_by = {
+        #    '$group': {
+        #        '_id': '$city',
+        #        'total_inhabitants': {'$sum': 1}
+        #    }
+        # }
 
-        # rename the _id to city
-        # set_columns = {'$set': {'city': '$_id'}}
-        set_columns = {'$set': {'location': {'type': 'Point', 'coordinates': [{'$toDouble': {'$arrayElemAt': ['$position', 1]}}, {'$toDouble': {'$arrayElemAt': ['$position', 0]}}]}}}
-        unset_columns = {'$unset': ['_id']}
+        set_columns = {'$set': {'location': {'type': 'Point',
+                                             'coordinates': [{'$toDouble': {'$arrayElemAt': ['$position', 1]}},
+                                                             {'$toDouble': {'$arrayElemAt': ['$position', 0]}}]}}}
+        unset_columns = {'$unset': ['position']}
 
         # sort by the number of inhabitants desc
-        order_by = {'$sort': {'total_inhabitants': pymongo.DESCENDING}}
+        # order_by = {'$sort': {'total_inhabitants': pymongo.DESCENDING}}
 
-        pipeline = [group_by, set_columns, unset_columns, order_by]
+        pipeline = [set_columns, unset_columns]
 
         # make sure we fetch everything by explicitly casting to list
         # use self.collection instead of self.collection_secondary to run the pipeline on the primary
@@ -86,7 +87,8 @@ class MongoSampleUser(MongoUser):
         # prepare the collection
         index2 = pymongo.IndexModel([('vehicleid', pymongo.ASCENDING)], name="idx_vehicleid")
         index3 = pymongo.IndexModel([('position', '2d')], name="idx_position_2d")
-        self.collection, self.collection_secondary = self.ensure_collection(DEFAULTS['COLLECTION_NAME'], [index2, index3])
+        self.collection, self.collection_secondary = self.ensure_collection(DEFAULTS['COLLECTION_NAME'],
+                                                                            [index2, index3])
 
         self.name_cache = []
 
