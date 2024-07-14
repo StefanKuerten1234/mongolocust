@@ -7,7 +7,7 @@ DEFAULTS = {'DB_NAME': 'loadtest',
             'INSERT_WEIGHT': 0,
             'FIND_WEIGHT': 0,
             'BULK_INSERT_WEIGHT': 10,
-            'AGG_PIPE_WEIGHT': 1}
+            'AGG_PIPE_WEIGHT': 0}
 
 
 def init_defaults_from_env():
