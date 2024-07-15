@@ -6,8 +6,8 @@ DEFAULTS = {'DB_NAME': 'loadtest',
             'DOCS_PER_BATCH': 100,
             'INSERT_WEIGHT': 0,
             'FIND_WEIGHT': 0,
-            'BULK_INSERT_WEIGHT': 10,
-            'AGG_PIPE_WEIGHT': 0}
+            'BULK_INSERT_WEIGHT': 2,
+            'AGG_PIPE_WEIGHT': 1}
 
 
 def init_defaults_from_env():

@@ -66,9 +66,7 @@ class MongoSampleUser(MongoUser):
         #    }
         # }
 
-        set_columns = {'$set': {'location': {'type': 'Point',
-                                             'coordinates': [{'$toDouble': {'$arrayElemAt': ['$position', 1]}},
-                                                             {'$toDouble': {'$arrayElemAt': ['$position', 0]}}]}}}
+        set_columns = {'$set': {'location': {'type': 'Point', 'coordinates': [{'$toDouble': {'$arrayElemAt': ['$position', 1]}}, {'$toDouble': {'$arrayElemAt': ['$position', 0]}}]}}}
         unset_columns = {'$unset': ['position']}
 
         # sort by the number of inhabitants desc
@@ -86,7 +84,7 @@ class MongoSampleUser(MongoUser):
         """
         # prepare the collection
         index2 = pymongo.IndexModel([('vehicleid', pymongo.ASCENDING)], name="idx_vehicleid")
-        index3 = pymongo.IndexModel([('position', '2d')], name="idx_position_2d")
+        index3 = pymongo.IndexModel([('location', '2dsphere')], name="idx_location_2dsphere")
         self.collection, self.collection_secondary = self.ensure_collection(DEFAULTS['COLLECTION_NAME'],
                                                                             [index2, index3])
 
