@@ -6,7 +6,7 @@ DEFAULTS = {'DB_NAME': 'loadtest',
             'DOCS_PER_BATCH': 100,
             'INSERT_WEIGHT': 0,
             'FIND_WEIGHT': 0,
-            'BULK_INSERT_WEIGHT': 2,
+            'BULK_INSERT_WEIGHT': 100,
             'AGG_PIPE_WEIGHT': 1}
 
 
