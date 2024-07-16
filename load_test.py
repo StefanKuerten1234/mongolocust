@@ -2,7 +2,7 @@ from locust import between
 
 from mongo_user import MongoUser, mongodb_task
 from settings import DEFAULTS
-import datetime
+from datetime import datetime
 
 import pymongo
 import random
