@@ -83,10 +83,12 @@ class MongoSampleUser(MongoUser):
         Executed every time a new test is started - place init code here
         """
         # prepare the collection
-        index2 = pymongo.IndexModel([('vehicleid', pymongo.ASCENDING)], name="idx_vehicleid")
-        index3 = pymongo.IndexModel([('location', '2dsphere')], name="idx_location_2dsphere")
+        index_vehicleid = pymongo.IndexModel([('vehicleid', pymongo.ASCENDING)], name="idx_vehicleid")
+        index_location = pymongo.IndexModel([('location', '2dsphere')], name="idx_location_2dsphere")
+        index_ts_vehicleid = pymongo.IndexModel([('ts', pymongo.ASCENDING), ('vehicleid')], name="idx_ts_vehicle")
+        index_vehicleid_enginestate = pymongo.IndexModel([('vehicleid'), ('enginestate')], name="idx_vehicle_status")
         self.collection, self.collection_secondary = self.ensure_collection(DEFAULTS['COLLECTION_NAME'],
-                                                                            [index2, index3])
+                                                                            [index_vehicleid, index_location, index_ts_vehicleid, index_vehicleid_enginestate])
 
         self.name_cache = []
 
