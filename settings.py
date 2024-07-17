@@ -1,13 +1,13 @@
 import os
 
 DEFAULTS = {'DB_NAME': 'loadtest',
-            'COLLECTION_NAME': 'measurements',
+            'COLLECTION_NAME': 'measurements_ts',
             'CLUSTER_URL': f'mongodb+srv://stefan:STAVfvCkuHN0FgyT@atlascluster.am7mj2q.mongodb.net/',
             'DOCS_PER_BATCH': 150,
             'INSERT_WEIGHT': 0,
             'FIND_WEIGHT': 0,
             'BULK_INSERT_WEIGHT': 100,
-            'AGG_PIPE_WEIGHT': 0}
+            'AGG_PIPE_WEIGHT': 1}
 
 
 def init_defaults_from_env():

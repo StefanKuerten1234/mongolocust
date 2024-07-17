@@ -75,11 +75,12 @@ class MongoSampleUser(MongoUser):
         """
         # prepare the collection
         index_vehicleid = pymongo.IndexModel([('vehicleid', pymongo.ASCENDING)], name="idx_vehicleid")
+        index_ts = pymongo.IndexModel([('ts', pymongo.ASCENDING)], name="idx_ts")
         index_location = pymongo.IndexModel([('location', '2dsphere')], name="idx_location_2dsphere")
         index_ts_vehicleid = pymongo.IndexModel([('ts', pymongo.ASCENDING), ('vehicleid')], name="idx_ts_vehicle")
         index_vehicleid_enginestate = pymongo.IndexModel([('vehicleid'), ('enginestate')], name="idx_vehicle_status")
         self.collection, self.collection_secondary = self.ensure_collection(DEFAULTS['COLLECTION_NAME'],
-                                                                            [index_vehicleid, index_location, index_ts_vehicleid, index_vehicleid_enginestate])
+                                                                            [index_vehicleid, index_ts, index_location, index_ts_vehicleid, index_vehicleid_enginestate])
 
         self.name_cache = []
 
