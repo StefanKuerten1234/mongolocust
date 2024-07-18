@@ -112,4 +112,4 @@ class MongoSampleUser(MongoUser):
     def insert_documents_bulk(self):
         self.collection.insert_many(
             [self.generate_new_document() for _ in
-             range(int(DEFAULTS['DOCS_PER_BATCH']))])
+             range(int(DEFAULTS['DOCS_PER_BATCH']))], ordered=False)
